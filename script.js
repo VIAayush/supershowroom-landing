@@ -19,14 +19,59 @@
   // Mobile menu
   const toggle = document.getElementById('navToggle');
   const menu = document.getElementById('mobileMenu');
-  toggle.addEventListener('click', () => {
-    const open = menu.classList.toggle('open');
+  const setMenu = open => {
+    menu.classList.toggle('open', open);
     toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    document.documentElement.classList.toggle('menu-open', open);
+  };
+  toggle.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+  window.addEventListener('resize', () => { if (window.innerWidth > 720) setMenu(false); });
+
+  // Hide the sticky mobile CTA while the keyboard is up
+  document.addEventListener('focusin', e => {
+    if (e.target.matches('input, select, textarea')) document.documentElement.classList.add('typing');
   });
-  menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
-    menu.classList.remove('open');
-    toggle.setAttribute('aria-expanded', 'false');
-  }));
+  document.addEventListener('focusout', () => document.documentElement.classList.remove('typing'));
+
+  // Mobile swipe rows: dot indicators + start position
+  const swipeQuery = window.matchMedia('(max-width: 720px)');
+  document.querySelectorAll('.m-swipe').forEach(row => {
+    const items = [...row.children];
+    if (items.length < 2) return;
+    const dots = document.createElement('div');
+    dots.className = 'swipe-dots';
+    dots.setAttribute('aria-hidden', 'true');
+    items.forEach((item, i) => {
+      const b = document.createElement('button');
+      b.type = 'button';
+      b.tabIndex = -1;
+      b.addEventListener('click', () => row.scrollTo({ left: item.offsetLeft - parseFloat(getComputedStyle(row).paddingLeft), behavior: 'smooth' }));
+      dots.appendChild(b);
+    });
+    row.after(dots);
+    const update = () => {
+      const pad = parseFloat(getComputedStyle(row).paddingLeft) || 0;
+      let idx = 0, best = Infinity;
+      items.forEach((item, i) => {
+        const d = Math.abs(item.offsetLeft - pad - row.scrollLeft);
+        if (d < best) { best = d; idx = i; }
+      });
+      [...dots.children].forEach((d, i) => d.classList.toggle('on', i === idx));
+    };
+    row.addEventListener('scroll', update, { passive: true });
+    const start = row.dataset.start && row.querySelector(row.dataset.start);
+    const place = () => {
+      if (swipeQuery.matches && start) {
+        row.scrollLeft = start.offsetLeft - (parseFloat(getComputedStyle(row).paddingLeft) || 0);
+      }
+      update();
+    };
+    place();
+    window.addEventListener('load', place);
+  });
 
   // Reveal on scroll — progressive enhancement.
   // Content is visible by default; it is only hidden once this script runs (html.js-reveal),
