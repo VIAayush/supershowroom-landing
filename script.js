@@ -28,13 +28,32 @@
     toggle.setAttribute('aria-expanded', 'false');
   }));
 
-  // Reveal on scroll
-  const io = 'IntersectionObserver' in window ? new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) { e.target.classList.add(e.target.classList.contains('timeline') ? 'in-view' : 'in'); io.unobserve(e.target); }
+  // Reveal on scroll — progressive enhancement.
+  // Content is visible by default; it is only hidden once this script runs (html.js-reveal),
+  // and reveals are driven by scroll position so they never depend on IntersectionObserver.
+  const reveal = el => el.classList.add(el.classList.contains('timeline') ? 'in-view' : 'in');
+  document.querySelectorAll('.hero .reveal').forEach(reveal);
+  let pending = [...document.querySelectorAll('.reveal, .timeline')].filter(el => !el.closest('.hero'));
+  const checkReveal = () => {
+    if (!pending.length) return;
+    const limit = window.innerHeight * 0.92;
+    pending = pending.filter(el => {
+      if (el.getBoundingClientRect().top < limit) { reveal(el); return false; }
+      return true;
     });
-  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }) : null;
-  document.querySelectorAll('.reveal, .timeline').forEach(el => io ? io.observe(el) : el.classList.add('in', 'in-view'));
+    if (!pending.length) {
+      window.removeEventListener('scroll', checkReveal);
+      window.removeEventListener('resize', checkReveal);
+      clearInterval(revealPoll);
+    }
+  };
+  document.documentElement.classList.add('js-reveal');
+  window.addEventListener('scroll', checkReveal, { passive: true });
+  window.addEventListener('resize', checkReveal);
+  window.addEventListener('load', checkReveal);
+  // Timer fallback: some browsers/webviews throttle or skip scroll events.
+  const revealPoll = setInterval(checkReveal, 250);
+  checkReveal();
 
   // Plan buttons preselect the contact form plan
   document.querySelectorAll('.plan-cta').forEach(btn => btn.addEventListener('click', () => {
