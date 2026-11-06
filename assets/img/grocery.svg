@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F1F6E9"/><stop offset="1" stop-color="#DCE8C8"/></linearGradient>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".55"/><stop offset=".5" stop-color="#FFFFFF" stop-opacity=".15"/><stop offset="1" stop-color="#FFFFFF" stop-opacity=".45"/></linearGradient>
+    <radialGradient id="nut" cx=".4" cy=".35" r=".7"><stop offset="0" stop-color="#C98B55"/><stop offset="1" stop-color="#8A5527"/></radialGradient>
+    <filter id="sh"><feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#3F5A1F" flood-opacity=".25"/></filter>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <ellipse cx="200" cy="340" rx="120" ry="16" fill="#C9D9B0"/>
+  <g filter="url(#sh)">
+    <rect x="130" y="70" width="140" height="34" rx="8" fill="#2F6B2F"/>
+    <rect x="122" y="100" width="156" height="240" rx="30" fill="#F6EEDF"/>
+  </g>
+  <g>
+    <ellipse cx="160" cy="300" rx="16" ry="11" fill="url(#nut)" transform="rotate(-20 160 300)"/>
+    <ellipse cx="196" cy="306" rx="16" ry="11" fill="url(#nut)" transform="rotate(15 196 306)"/>
+    <ellipse cx="234" cy="298" rx="16" ry="11" fill="url(#nut)" transform="rotate(-35 234 298)"/>
+    <ellipse cx="176" cy="276" rx="16" ry="11" fill="url(#nut)" transform="rotate(30 176 276)"/>
+    <ellipse cx="214" cy="272" rx="16" ry="11" fill="url(#nut)" transform="rotate(-10 214 272)"/>
+    <ellipse cx="148" cy="256" rx="16" ry="11" fill="url(#nut)" transform="rotate(10 148 256)"/>
+    <ellipse cx="248" cy="258" rx="16" ry="11" fill="url(#nut)" transform="rotate(40 248 258)"/>
+    <ellipse cx="194" cy="246" rx="16" ry="11" fill="url(#nut)" transform="rotate(-25 194 246)"/>
+    <ellipse cx="164" cy="228" rx="16" ry="11" fill="url(#nut)" transform="rotate(20 164 228)"/>
+    <ellipse cx="230" cy="226" rx="16" ry="11" fill="url(#nut)" transform="rotate(-15 230 226)"/>
+  </g>
+  <rect x="122" y="100" width="156" height="240" rx="30" fill="url(#glass)"/>
+  <rect x="150" y="140" width="100" height="56" rx="8" fill="#FFFFFF"/>
+  <text x="200" y="166" text-anchor="middle" font-family="Georgia,serif" font-style="italic" font-size="20" fill="#2F6B2F">Almonds</text>
+  <text x="200" y="185" text-anchor="middle" font-family="Arial,sans-serif" font-size="10" letter-spacing="2" fill="#6B7F55">500 G · 1 KG</text>
+  <rect x="136" y="116" width="10" height="200" rx="5" fill="#fff" opacity=".5"/>
+</svg>

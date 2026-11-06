@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F3F4F6"/><stop offset="1" stop-color="#E2E5EA"/></linearGradient>
+    <linearGradient id="steel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#A9B0BB"/><stop offset=".45" stop-color="#F2F4F7"/><stop offset="1" stop-color="#9AA2AE"/></linearGradient>
+    <radialGradient id="face" cx=".4" cy=".35" r=".8"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#DCE1E8"/></radialGradient>
+    <filter id="sh"><feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#334155" flood-opacity=".25"/></filter>
+  </defs>
+  <rect width="400" height="400" fill="url(#bg)"/>
+  <g filter="url(#sh)">
+    <rect x="160" y="20" width="80" height="360" rx="14" fill="url(#steel)"/>
+    <g stroke="#8B93A0" stroke-width="2" opacity=".55"><line x1="160" y1="60" x2="240" y2="60"/><line x1="160" y1="95" x2="240" y2="95"/><line x1="160" y1="305" x2="240" y2="305"/><line x1="160" y1="340" x2="240" y2="340"/></g>
+    <circle cx="200" cy="200" r="98" fill="url(#steel)"/>
+    <rect x="292" y="188" width="16" height="24" rx="4" fill="#A9B0BB"/>
+    <circle cx="200" cy="200" r="82" fill="url(#face)" stroke="#C3C9D2" stroke-width="3"/>
+  </g>
+  <g stroke="#1F2937" stroke-linecap="round">
+    <g stroke-width="4"><line x1="200" y1="128" x2="200" y2="142"/><line x1="272" y1="200" x2="258" y2="200"/><line x1="200" y1="272" x2="200" y2="258"/><line x1="128" y1="200" x2="142" y2="200"/></g>
+    <line x1="200" y1="200" x2="200" y2="150" stroke-width="5"/>
+    <line x1="200" y1="200" x2="240" y2="222" stroke-width="4"/>
+    <line x1="200" y1="200" x2="160" y2="240" stroke="#E2553D" stroke-width="2"/>
+  </g>
+  <circle cx="200" cy="200" r="6" fill="#1F2937"/>
+</svg>
